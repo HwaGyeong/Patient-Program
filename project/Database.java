@@ -132,5 +132,17 @@ public class Database {
                }
               return ID;
         }
+           
+          public void deletePatient(String patientID){
+          Patient temp = new Patient();
+          String qry="DELETE FROM patienttable WHERE PatientID= ";
+               try{      
+                   Statement stmt=conn.createStatement();
+                   stmt.executeUpdate(qry+ patientID);
+               }
+               catch(Exception e){
+                   e.getMessage();
+               }               
+       }
     
 }

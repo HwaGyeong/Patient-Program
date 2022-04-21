@@ -9,9 +9,9 @@ package project;
  * @author LG
  */
 public class PatientDemographics extends javax.swing.JFrame {
-
+    String selection="";
     public PatientDemographics(String selectedRow) {
-        
+        selection=selectedRow;
         initComponents();
         System.out.println(selectedRow+" row got it");
         //find row and set each data
@@ -117,6 +117,7 @@ public class PatientDemographics extends javax.swing.JFrame {
         delete = new javax.swing.JButton();
         close = new javax.swing.JButton();
         edit = new javax.swing.JButton();
+        interview = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -434,6 +435,13 @@ public class PatientDemographics extends javax.swing.JFrame {
             }
         });
 
+        interview.setText("interview");
+        interview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interviewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -546,16 +554,20 @@ public class PatientDemographics extends javax.swing.JFrame {
                             .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(179, 179, 179)
+                .addGap(139, 139, 139)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(interview, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(interview))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientIDL)
                     .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -920,7 +932,10 @@ public class PatientDemographics extends javax.swing.JFrame {
     }//GEN-LAST:event_nokActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        // TODO add your handling code here:
+        if(evt.getSource()==delete){          
+            Database db= new Database();
+            db.deletePatient(selection);
+        }
     }//GEN-LAST:event_deleteActionPerformed
 
     private void deletePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_deletePropertyChange
@@ -932,7 +947,10 @@ public class PatientDemographics extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteKeyPressed
 
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
-        // TODO add your handling code here:
+        if(evt.getSource()==close){
+            new PatientSelection();
+            setVisible(false);
+        }  
     }//GEN-LAST:event_closeActionPerformed
 
     private void closePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_closePropertyChange
@@ -981,6 +999,10 @@ public class PatientDemographics extends javax.swing.JFrame {
     private void editKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_editKeyPressed
+
+    private void interviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interviewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interviewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1054,6 +1076,7 @@ public class PatientDemographics extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField home_phone;
     private javax.swing.JLabel home_phoneL;
     private javax.swing.JTextField home_zip;
+    private javax.swing.JButton interview;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField lastname;
     private javax.swing.JLabel lastnameL;

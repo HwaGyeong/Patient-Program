@@ -17,6 +17,7 @@ public class PatientSelection extends javax.swing.JFrame {
     String selectedRow="";
     public PatientSelection() {
         initComponents();
+        setVisible(true);
     }
 
     /**
