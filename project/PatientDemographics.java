@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package project;
 
-/**
- *
- * @author LG
- */
+
+
+
 public class PatientDemographics extends javax.swing.JFrame {
     String selection="";
+ 
     public PatientDemographics(String selectedRow) {
         selection=selectedRow;
         initComponents();
@@ -725,12 +722,12 @@ public class PatientDemographics extends javax.swing.JFrame {
             p.setMiddleInitial(middle_initial.getText());
             p.setNextOfKinRelationshipToPatient(nok_realtionship_to_patient.getText());  
 
-            int ID=db.insertData(p);
+            int ID=db.insertPatient(p);
             //erase all of the data
-            p= db.findPatient(Integer.toString(ID));
-            patientID.setText(Integer.toString(p.getPatientID()));
-            lastname.setText(p.getLastName());
-            p_lastname.setText(p.getPrevLastname());
+            Patient t= db.findPatient(Integer.toString(ID));
+            patientID.setText(Integer.toString(t.getPatientID()));
+            lastname.setText(t.getLastName());
+            p_lastname.setText(t.getPrevLastname());
             firstname.setText(p.getFirstName());
             home_address1.setText(p.getHomeAddress1());
             home_address2.setText(p.getHomeAddress2());
@@ -756,8 +753,8 @@ public class PatientDemographics extends javax.swing.JFrame {
             nok_realtionship_to_patient.setText(p.getNextOfKinRelationshipToPatient());
 
             //turn to gray background and lock
-            lastname.setEnabled(true);
-            p_lastname.setEnabled(true);
+            lastname.setEnabled(false);
+            p_lastname.setEnabled(false);
             firstname.setEnabled(true);
             home_address1.setEnabled(true);
             home_address2.setEnabled(true);
