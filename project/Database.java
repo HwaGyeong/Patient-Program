@@ -15,7 +15,7 @@ import java.util.List;
 public class Database {
     String dbURL="jdbc:mysql://localhost:3306/its340?autoReconnect=true";
        Connection conn=DBUtils.ConnectToMySQLDB(dbURL,"root","password");
-       DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
+       DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
        
        public List<Patient> findAllPatient(){
           List <Patient> patients = new ArrayList <>();
@@ -109,7 +109,7 @@ public class Database {
                    ps.setString(12,p.getEmergencyPhone());
                    ps.setString(13,p.getEmail());
                    ps.setString(14,p.getPtss());
-   //                ps.setDate(15, (Date)dateFormat.parse(p.getDob()).getTime());
+                   ps.setDate(15, new Date(dateFormat.parse(p.getDob()).getTime()));
                    ps.setString(16,p.getGender());
                    ps.setString(17,p.getEthnicAssociation());
                    ps.setString(18,p.getMartialStatus());
@@ -147,18 +147,17 @@ public class Database {
                }               
        }
           
-          public void updatePatient(Patient p){
-              System.out.println("hello");
+          public int updatePatient(Patient p){
            try{
                   Statement stmt=conn.createStatement();
-                   String qryInsert = "UPDATE INTO patienttable set"
+                   String qryInsert = "UPDATE patienttable set "
                     +"PtLastName=?,PtPreviousLastName=?, PtFirstName=?,HomeAddress1=?,HomeAddress2=?,HomeCity=?,HomeState=?,"
                            + "HomeZip=?,Country=?, Citizenship=?,PtHomePhone=?,EmergencyPhoneNumber=?,EmailAddress=?,PtSSN=?,DOB=?,"
                            + "Gender=?,EthnicAssociation=?,MaritalStatus=?,CurrentPrimaryHCPId=?,Active=?,"
                            + "Comments=?,SubscriberRelationship=?,NextOfKin=?,PtMiddleInitial=?,NextOfKinRelationshipToPatient=? WHERE PatientID=? ";
                    //insert a record into patient table using prepared statement
-                   PreparedStatement ps = conn.prepareStatement(qryInsert,Statement.RETURN_GENERATED_KEYS);
-                   System.out.println(qryInsert); 
+                   PreparedStatement ps = conn.prepareStatement(qryInsert);
+                   System.out.println(p.getPatientID()); 
                    ps.setString(1,p.getLastName());
                    ps.setString(2,p.getPrevLastname());
                    ps.setString(3,p.getFirstName());
@@ -173,7 +172,7 @@ public class Database {
                    ps.setString(12,p.getEmergencyPhone());
                    ps.setString(13,p.getEmail());
                    ps.setString(14,p.getPtss());
-              //     ps.setDate(15, (Date) p.getDob());
+                   ps.setDate(15, new Date(dateFormat.parse(p.getDob()).getTime()));
                    ps.setString(16,p.getGender());
                    ps.setString(17,p.getEthnicAssociation());
                    ps.setString(18,p.getMartialStatus());
@@ -184,7 +183,7 @@ public class Database {
                    ps.setString(23,p.getNextOfKin());
                    ps.setString(24,p.getMiddleInitial());
                    ps.setString(25,p.getNextOfKinRelationshipToPatient());
-                   ps.setInt(25,p.getPatientID());
+                   ps.setInt(26,p.getPatientID());
                    int rowCount = ps.executeUpdate();
 
                    System.out.println("Record updated using prepared statement! ");                   
@@ -194,7 +193,7 @@ public class Database {
                    e.getMessage();
                    System.out.println(e.getMessage());
                }
-              
+              return p.getPatientID();
         }
     
 }
