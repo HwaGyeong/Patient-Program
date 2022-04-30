@@ -1064,7 +1064,10 @@ public class PatientDemographics extends javax.swing.JFrame {
     }//GEN-LAST:event_editKeyPressed
 
     private void interviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interviewActionPerformed
-        // TODO add your handling code here:
+        if(evt.getSource()==interview){
+            new GeneralMedicalPage(selection);
+            setVisible(false); 
+        }
     }//GEN-LAST:event_interviewActionPerformed
 
     /**

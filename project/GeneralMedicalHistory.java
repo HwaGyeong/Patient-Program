@@ -4,6 +4,20 @@ package project;
 public class GeneralMedicalHistory {
 
     /**
+     * @return the alcoholQuantity
+     */
+    public String getAlcoholQuantity() {
+        return alcoholQuantity;
+    }
+
+    /**
+     * @param alcoholQuantity the alcoholQuantity to set
+     */
+    public void setAlcoholQuantity(String alcoholQuantity) {
+        this.alcoholQuantity = alcoholQuantity;
+    }
+
+    /**
      * @return the generalID
      */
     public int getGeneralID() {
@@ -190,6 +204,7 @@ public class GeneralMedicalHistory {
     private String tobaccoQuantity;
     private String tobaccoDuration;
     private String alcohol;
+    private String alcoholQuantity;
     private String alcoholDuration;
     private String drug;
     private String drugType;

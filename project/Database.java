@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Database {
     String dbURL="jdbc:mysql://localhost:3306/its340?autoReconnect=true";
-       Connection conn=DBUtils.ConnectToMySQLDB(dbURL,"root","password");
+       Connection conn=DBUtils.ConnectToMySQLDB(dbURL,"root","");
        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
        
        public List<Patient> findAllPatient(){
@@ -195,5 +195,90 @@ public class Database {
                }
               return p.getPatientID();
         }
+          
+        //for GeneralMediclaHistory Table
+          
+        public int insertMedicalHistory(GeneralMedicalHistory g){
+           int ID=0;
+           try{
+                  Statement stmt=conn.createStatement();
+                   String qryInsert = "INSERT INTO generalmedicalhistorytable"
+                    +"(PatientID, Tobacco, TobaccoQuantity,Tobaccoduraton,"
+                           + "Alcohol,AlcoholQuantity,Alcoholduration,"
+                           +"Drug,DrugType,Drugduration,BloodType,Rh,deleted)"
+                    +"VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                   //insert a record into patient table using prepared statement
+                   PreparedStatement ps = conn.prepareStatement(qryInsert,Statement.RETURN_GENERATED_KEYS);
+                   
+                   ps.setInt(1,Integer.valueOf(g.getPatientID()));
+                   ps.setString(2,g.getTobacco());
+                   ps.setString(3,g.getTobaccoQuantity());
+                   ps.setString(4,g.getTobaccoDuration());
+                   ps.setString(5,g.getAlcohol());
+                   ps.setString(6,g.getAlcoholQuantity());
+                   ps.setString(7,g.getAlcoholDuration());
+                   ps.setString(8,g.getDrug());
+                   ps.setString(9,g.getDrugType());
+                   ps.setString(10,g.getDrugDuration());
+                   ps.setString(11,g.getBloodType());
+                   ps.setString(12,g.getRh());
+                   ps.setInt(13,g.getDeleted());
+
+                   int rowCount = ps.executeUpdate();
+                   ResultSet rs=ps.getGeneratedKeys();
+                   rs.next();
+                   ID= rs.getInt(1);
+                   System.out.println("Record inserted using prepared statement! ");                   
+                   conn.close();    
+                   
+               }
+               catch(Exception e){
+                   e.getMessage();
+                   System.out.println(e.getMessage());
+               }
+              return ID;
+        }
+        public GeneralMedicalHistory findGeneralMediclaHistory (String generalID){
+          GeneralMedicalHistory temp = new GeneralMedicalHistory();
+          String qry="SELECT * FROM generalmedicalhistorytable WHERE GeneralMedicalHistoryID= ";
+               try{      
+                   Statement stmt=conn.createStatement();
+                   ResultSet rs= stmt.executeQuery(qry+ generalID);
+                   
+                   while(rs.next()){
+                       temp.setGeneralID(rs.getInt(1));
+                       temp.setPatientID(rs.getInt(2));
+                       temp.setTobacco(rs.getString(3));
+                       temp.setTobaccoQuantity(rs.getString(4));
+                       temp.setTobaccoDuration(rs.getString(5));
+                       temp.setAlcohol(rs.getString(6));
+                       temp.setAlcoholQuantity(rs.getString(7));
+                       temp.setAlcoholDuration(rs.getString(8));
+                       temp.setDrug(rs.getString(9));
+                       temp.setDrugType(rs.getString(10));
+                       temp.setDrugDuration(rs.getString(11));
+                       temp.setBloodType(rs.getString(12));
+                       temp.setRh(rs.getString(13));
+                       temp.setDeleted(Integer.valueOf(rs.getString(14)));
+                       
+                   }
+               }
+               catch(Exception e){
+                   e.getMessage();
+               }
+               return temp;
+       }
+        
+        public void deleteGeneralHistory(String patientID){
+          GeneralMedicalHistory temp = new GeneralMedicalHistory();
+          String qry="DELETE FROM generalmedicalhistorytable WHERE PatientID= ";
+               try{      
+                   Statement stmt=conn.createStatement();
+                   stmt.executeUpdate(qry+ patientID);
+               }
+               catch(Exception e){
+                   e.getMessage();
+               }               
+       }
     
 }

@@ -17,14 +17,17 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
         Tree Marriage = new Tree();
              
         Node currentNode;
-        
+        String selection="";
     /**
      * Creates new form GeneralMedicalPage
      */
     public GeneralMedicalPage() {
+    }
+    public GeneralMedicalPage(String selectedRow) {
         initComponents();
         //create binary tree for interviews
-        
+        System.out.println("got it "+selectedRow);
+        selection=selectedRow;
         //blood type
         General.createRoot(1, "Is your blood type A? ");
         General.addYesNode(1,5,"Is your blood type RH+? ");
@@ -65,7 +68,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
         Marriage.createRoot(1,"Did you get married? (e.g. yes or no) ");
         Marriage.addYesNode(1,2, "Please click submit again, please fill other categories");
         Marriage.addNoNode(1,3, "Please click submit again, please fill other categories");
-
+        setVisible(true);
     }
 
     /**
@@ -120,6 +123,8 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         alcohol = new javax.swing.JTextField();
         list = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        patientID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -307,6 +312,15 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
 
         list.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blood Type", "Alcohol", "Tobacco", "Drug", "Marital" }));
 
+        jLabel8.setText("Patient ID");
+
+        patientID.setEditable(false);
+        patientID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -327,24 +341,19 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(list, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
@@ -355,7 +364,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
                                                 .addComponent(maritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 3, Short.MAX_VALUE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(durationA, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,31 +414,42 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
                                 .addGap(58, 58, 58)
                                 .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(list, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(25, 25, 25)
-                                    .addComponent(answers))
-                                .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(answers))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(25, 25, 25)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(questions, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(questions, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(97, 97, 97))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(start)
                     .addComponent(jLabel6)
-                    .addComponent(list, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(list, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(questions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,11 +458,10 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(answers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(submit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -518,107 +537,65 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-        Patient p =new Patient();
+        GeneralMedicalHistory g = new GeneralMedicalHistory();
         if(evt.getSource()==Save) {
             Database db =new Database();
+
+            g.setPatientID(Integer.valueOf(selection));
+            g.setTobacco(typeT.getText());
+            g.setTobaccoQuantity(quantityT.getText());
+            g.setTobaccoDuration(durationT.getText());
+            g.setAlcohol(typeA.getText());
+            g.setAlcoholQuantity(quantityA.getText());
+            g.setAlcoholDuration(durationA.getText());
+            g.setDrug(drug.getText());
+            g.setDrugType(typeD.getText());
+            g.setDrugDuration(durationD.getText());
+            g.setBloodType(bloodType.getText());
+            g.setRh(rh.getText());
+            g.setDeleted(0);
+
 //
-//            p.setLastName(lastname.getText());
-//            p.setPrevLastname(p_lastname.getText());
-//            p.setFirstName(firstname.getText());
-//            p.setHomeAddress1(home_address1.getText());
-//            p.setHomeAddress2(home_address2.getText());
-//            p.setHomeCity(home_city.getText());
-//            p.setHomeState(state.getText());
-//            p.setHomeZip(home_zip.getText());
-//            p.setCountry(country.getText());
-//            p.setCityzenship(citizenship.getText());
-//            p.setHomePhone(home_phone.getText());
-//            p.setEmergencyPhone(emergency_phone.getText());
-//            p.setEmail(email.getText());
-//            p.setPtss(ssn.getText());
-//            if(!"".equals(dob.getText()))
-//            p.setDob(dob.getText());
-//            else
-//            p.setDob("0000-00-00 00:00:00");
-//            p.setGender(gender.getText());
-//            p.setEthnicAssociation(ethnic_association.getText());
-//            p.setMartialStatus(martial_status.getText());
-//            p.setCurrentPrimaryHCPId(current_primary_hcpid.getText());
-//            if(!"".equals(active.getText()))
-//            p.setActive(Integer.valueOf(active.getText()));
-//            else
-//            p.setActive(1);
-//            p.setComments(comments.getText());
-//            p.setSubscriberRelationship(subscriber_realtionship.getText());
-//            p.setNextOfKin(nok.getText());
-//            p.setMiddleInitial(middle_initial.getText());
-//            p.setNextOfKinRelationshipToPatient(nok_realtionship_to_patient.getText());
-//
-//            int ID=0;
+            int ID=0;
 //            if(edit_check==true){
 //                p.setPatientID(Integer.valueOf(patientID.getText()));
 //                db.updatePatient(p);
 //                edit_check=false;
 //            }
 //            else
-//            ID=db.insertPatient(p);
+            ID=db.insertMedicalHistory(g);
 //
-//            //find a row to show the result
-//            Patient t= db.findPatient(Integer.toString(ID));
-//
-//            patientID.setText(Integer.toString(t.getPatientID()));
-//            lastname.setText(t.getLastName());
-//            p_lastname.setText(t.getPrevLastname());
-//            firstname.setText(p.getFirstName());
-//            home_address1.setText(p.getHomeAddress1());
-//            home_address2.setText(p.getHomeAddress2());
-//            home_city.setText(p.getHomeCity());
-//            state.setText(p.getHomeState());
-//            home_zip.setText(p.getHomeZip());
-//            country.setText(p.getCountry());
-//            citizenship.setText(p.getCityzenship());
-//            home_phone.setText(p.getHomePhone());
-//            emergency_phone.setText(p.getEmergencyPhone());
-//            email.setText(p.getEmail());
-//            ssn.setText(p.getPtss());
-//            dob.setText(p.getDob());
-//            gender.setText(p.getGender());
-//            ethnic_association.setText(p.getEthnicAssociation());
-//            martial_status.setText(p.getMartialStatus());
-//            current_primary_hcpid.setText(p.getCurrentPrimaryHCPId());
-//            active.setText(Integer.toString(p.getActive()));
-//            comments.setText(p.getComments());
-//            subscriber_realtionship.setText(p.getSubscriberRelationship());
-//            nok.setText(p.getNextOfKin());
-//            middle_initial.setText(p.getMiddleInitial());
-//            nok_realtionship_to_patient.setText(p.getNextOfKinRelationshipToPatient());
-//
-//            //turn to gray background and lock
-//            lastname.setEnabled(false);
-//            p_lastname.setEnabled(false);
-//            firstname.setEnabled(false);
-//            home_address1.setEnabled(false);
-//            home_address2.setEnabled(false);
-//            home_city.setEnabled(false);
-//            state.setEnabled(false);
-//            home_zip.setEnabled(false);
-//            country.setEnabled(false);
-//            citizenship.setEnabled(false);
-//            home_phone.setEnabled(false);
-//            emergency_phone.setEnabled(false);
-//            email.setEnabled(false);
-//            ssn.setEnabled(false);
-//            dob.setEnabled(false);
-//            gender.setEnabled(false);
-//            ethnic_association.setEnabled(false);
-//            martial_status.setEnabled(false);
-//            current_primary_hcpid.setEnabled(false);
-//            active.setEnabled(false);
-//            comments.setEnabled(false);
-//            subscriber_realtionship.setEnabled(false);
-//            nok.setEnabled(false);
-//            middle_initial.setEnabled(false);
-//            nok_realtionship_to_patient.setEnabled(false);
+            //find a row to show the result
+            GeneralMedicalHistory t= db.findGeneralMediclaHistory (Integer.toString(ID));
+
+            patientID.setText(Integer.toString(t.getPatientID()));
+            typeT.setText(t.getTobacco());
+            quantityT.setText(t.getTobaccoQuantity());
+            durationT.setText(t.getTobaccoDuration());
+            typeA.setText(t.getAlcohol());
+            quantityA.setText(t.getAlcoholQuantity());
+            durationA.setText(t.getAlcoholDuration());
+            drug.setText(t.getDrug());
+            typeD.setText(t.getDrug());
+            durationD.setText(t.getDrugDuration());
+            bloodType.setText(t.getBloodType());
+            rh.setText(t.getRh());
+            
+            
+            //turn to gray background and lock
+            patientID.setEnabled(false);
+            typeT.setEnabled(false);
+            quantityT.setEnabled(false);
+            durationT.setEnabled(false);
+            typeA.setEnabled(false);
+            quantityA.setEnabled(false);
+            durationA.setEnabled(false);
+            drug.setEnabled(false);
+            typeD.setEnabled(false);
+            durationD.setEnabled(false);
+            bloodType.setEnabled(false);
+            rh.setEnabled(false);
+
         }
     }//GEN-LAST:event_SaveActionPerformed
 
@@ -691,7 +668,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         if(evt.getSource()==delete){
             Database db= new Database();
-        //    db.deletePatient(selection);
+            db.deleteGeneralHistory(selection);
         }
     }//GEN-LAST:event_deleteActionPerformed
 
@@ -833,6 +810,10 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_alcoholActionPerformed
 
+    private void patientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientIDActionPerformed
+
     private void setDatas(String category, int nodeID){//for setting simple datas
         
         if(category.equals("Blood Type"))
@@ -877,7 +858,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
             }
             if(category.equals("Drug"))
             {
-                if(nodeID==5)
+                if(nodeID==4)
                     drug.setText("No");          
             }
             if(category.equals("Marital"))
@@ -984,10 +965,12 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JComboBox<String> list;
     private javax.swing.JTextField maritalStatus;
+    private javax.swing.JTextField patientID;
     private javax.swing.JTextField quantityA;
     private javax.swing.JTextField quantityT;
     private javax.swing.JTextField questions;
