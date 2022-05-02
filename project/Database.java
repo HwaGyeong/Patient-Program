@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Database {
     String dbURL="jdbc:mysql://localhost:3306/its340?autoReconnect=true";
-       Connection conn=DBUtils.ConnectToMySQLDB(dbURL,"root","");
+       Connection conn=DBUtils.ConnectToMySQLDB(dbURL,"root","password");
        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
        
        public List<Patient> findAllPatient(){
@@ -125,7 +125,7 @@ public class Database {
                    rs.next();
                    ID= rs.getInt(1);
                    System.out.println("Record inserted using prepared statement! ");                   
-                   conn.close();    
+                      
                    
                }
                catch(Exception e){
@@ -187,7 +187,7 @@ public class Database {
                    int rowCount = ps.executeUpdate();
 
                    System.out.println("Record updated using prepared statement! ");                   
-                   conn.close();                      
+                                       
                }
                catch(Exception e){
                    e.getMessage();
@@ -229,7 +229,7 @@ public class Database {
                    rs.next();
                    ID= rs.getInt(1);
                    System.out.println("Record inserted using prepared statement! ");                   
-                   conn.close();    
+                   
                    
                }
                catch(Exception e){
@@ -238,12 +238,12 @@ public class Database {
                }
               return ID;
         }
-        public GeneralMedicalHistory findGeneralMediclaHistory (String generalID){
+        public GeneralMedicalHistory findGeneralMediclaHistory (String patientID){
           GeneralMedicalHistory temp = new GeneralMedicalHistory();
-          String qry="SELECT * FROM generalmedicalhistorytable WHERE GeneralMedicalHistoryID= ";
+          String qry="SELECT * FROM generalmedicalhistorytable WHERE PatientID= ";
                try{      
                    Statement stmt=conn.createStatement();
-                   ResultSet rs= stmt.executeQuery(qry+ generalID);
+                   ResultSet rs= stmt.executeQuery(qry+ patientID);
                    
                    while(rs.next()){
                        temp.setGeneralID(rs.getInt(1));
@@ -259,13 +259,13 @@ public class Database {
                        temp.setDrugDuration(rs.getString(11));
                        temp.setBloodType(rs.getString(12));
                        temp.setRh(rs.getString(13));
-                       temp.setDeleted(Integer.valueOf(rs.getString(14)));
-                       
+                       temp.setDeleted(Integer.valueOf(rs.getString(14)));                      
                    }
                }
                catch(Exception e){
                    e.getMessage();
                }
+               System.out.println("Selection complete "+"and selection"+ patientID+"," +temp.getPatientID()+"and "+temp.getGeneralID());
                return temp;
        }
         
@@ -280,5 +280,40 @@ public class Database {
                    e.getMessage();
                }               
        }
-    
+      public int updateGeneralHistory(GeneralMedicalHistory g){
+           try{
+                  Statement stmt=conn.createStatement();
+                   String qryInsert = "UPDATE generalmedicalhistorytable set "
+                         +"Tobacco=?, TobaccoQuantity=?,Tobaccoduraton=?,"
+                           + "Alcohol=?,AlcoholQuantity=?,Alcoholduration=?,"
+                           +"Drug=?,DrugType=?,Drugduration=?,BloodType=?,Rh=?,deleted=?"
+                    +" WHERE PatientID=?";
+                   //insert a record into patient table using prepared statement
+                   PreparedStatement ps = conn.prepareStatement(qryInsert);
+                   
+                   ps.setString(1,g.getTobacco());
+                   ps.setString(2,g.getTobaccoQuantity());
+                   ps.setString(3,g.getTobaccoDuration());
+                   ps.setString(4,g.getAlcohol());
+                   ps.setString(5,g.getAlcoholQuantity());
+                   ps.setString(6,g.getAlcoholDuration());
+                   ps.setString(7,g.getDrug());
+                   ps.setString(8,g.getDrugType());
+                   ps.setString(9,g.getDrugDuration());
+                   ps.setString(10,g.getBloodType());
+                   ps.setString(11,g.getRh());
+                   ps.setInt(12,g.getDeleted());
+                   ps.setInt(13,Integer.valueOf(g.getPatientID()));
+                   int rowCount = ps.executeUpdate();
+
+                   System.out.println("Record updated using prepared statement! ");                   
+                   conn.close();                      
+               }
+               catch(Exception e){
+                   e.getMessage();
+                   System.out.println(e.getMessage());
+               }
+              return g.getPatientID();
+        }
+          
 }

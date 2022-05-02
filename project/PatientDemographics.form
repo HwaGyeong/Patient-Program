@@ -30,22 +30,6 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="192" pref="192" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace min="156" pref="156" max="-2" attributes="0"/>
-                      <Component id="interview" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                      <Component id="patientIDL" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
-                      <Component id="patientID" min="-2" pref="124" max="-2" attributes="0"/>
-                      <EmptySpace min="53" pref="53" max="-2" attributes="0"/>
-                      <Component id="home_address1L" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
-                      <Component id="home_address1" min="-2" pref="124" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       <Component id="lastnameL" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
@@ -178,8 +162,26 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="close" min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="192" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="interview" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <Component id="patientIDL" min="-2" pref="70" max="-2" attributes="0"/>
+                          <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
+                          <Component id="patientID" min="-2" pref="124" max="-2" attributes="0"/>
+                          <EmptySpace min="53" pref="53" max="-2" attributes="0"/>
+                          <Component id="home_address1L" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
+                          <Component id="home_address1" min="-2" pref="124" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -187,14 +189,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="interview" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="interview" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="patientID" min="-2" max="-2" attributes="0"/>
                   <Component id="home_address1" min="-2" max="-2" attributes="0"/>
@@ -768,7 +767,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="interview">
       <Properties>
-        <Property name="text" type="java.lang.String" value="interview"/>
+        <Property name="text" type="java.lang.String" value="General Medical History"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="interviewActionPerformed"/>

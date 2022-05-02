@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package project;
 
-/**
- *
- * @author LG
- */
 public class GeneralMedicalPage extends javax.swing.JFrame {
 
         Tree General = new Tree();
@@ -18,6 +11,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
              
         Node currentNode;
         String selection="";
+        Boolean edit_check=false;
     /**
      * Creates new form GeneralMedicalPage
      */
@@ -28,6 +22,42 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
         //create binary tree for interviews
         System.out.println("got it "+selectedRow);
         selection=selectedRow;
+        
+        //set patient's information 
+        Database db=new Database();
+        patientID.setText(selection);
+        patientID.setEnabled(false);
+        tobacco.setEnabled(false);
+        typeT.setEnabled(false);
+        quantityT.setEnabled(false);
+        durationT.setEnabled(false);
+        alcohol.setEnabled(false);
+        typeA.setEnabled(false);
+        quantityA.setEnabled(false);
+        durationA.setEnabled(false);
+        drug.setEnabled(false);
+        typeD.setEnabled(false);
+        durationD.setEnabled(false);
+        bloodType.setEnabled(false);
+        rh.setEnabled(false);
+        maritalStatus.setEnabled(false);
+        
+        GeneralMedicalHistory t= db.findGeneralMediclaHistory (selection);
+        Patient p = db.findPatient(selection);
+        typeT.setText(t.getTobacco());
+        quantityT.setText(t.getTobaccoQuantity());
+        durationT.setText(t.getTobaccoDuration());
+        typeA.setText(t.getAlcohol());
+        quantityA.setText(t.getAlcoholQuantity());
+        durationA.setText(t.getAlcoholDuration());
+        drug.setText(t.getDrug());
+        typeD.setText(t.getDrug());
+        durationD.setText(t.getDrugDuration());
+        bloodType.setText(t.getBloodType());
+        rh.setText(t.getRh());
+        maritalStatus.setText(p.getMartialStatus());
+        
+        
         //blood type
         General.createRoot(1, "Is your blood type A? ");
         General.addYesNode(1,5,"Is your blood type RH+? ");
@@ -243,14 +273,12 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("굴림", 1, 14)); // NOI18N
         jLabel6.setText("General Medical History Interview");
 
-        bloodType.setEditable(false);
         bloodType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bloodTypeActionPerformed(evt);
             }
         });
 
-        rh.setEditable(false);
         rh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rhActionPerformed(evt);
@@ -259,17 +287,11 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
 
         jLabel7.setText("Marital Status");
 
-        maritalStatus.setEditable(false);
-
         jLabel9.setText("Type");
 
         jLabel10.setText("Quantity");
 
         jLabel11.setText("Duration");
-
-        typeA.setEditable(false);
-
-        durationA.setEditable(false);
 
         jLabel12.setText("Tobacco");
 
@@ -279,31 +301,14 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
 
         jLabel15.setText("Duration");
 
-        tobacco.setEditable(false);
-
-        typeT.setEditable(false);
-
-        quantityT.setEditable(false);
-
-        durationT.setEditable(false);
-
-        drug.setEditable(false);
-
-        typeD.setEditable(false);
-
-        durationD.setEditable(false);
-
         jLabel16.setText("Drug");
 
         jLabel17.setText("Type");
 
         jLabel19.setText("Duration");
 
-        quantityA.setEditable(false);
-
         jLabel18.setText("Alcohol");
 
-        alcohol.setEditable(false);
         alcohol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alcoholActionPerformed(evt);
@@ -353,19 +358,16 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(rh, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(maritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(18, 18, 18)
+                                        .addComponent(rh, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(maritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(durationA, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(typeA, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,6 +540,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         GeneralMedicalHistory g = new GeneralMedicalHistory();
+        Patient p = new Patient();
         if(evt.getSource()==Save) {
             Database db =new Database();
 
@@ -554,39 +557,30 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
             g.setBloodType(bloodType.getText());
             g.setRh(rh.getText());
             g.setDeleted(0);
-
+            p.setMartialStatus(maritalStatus.getText());
+            p.setPatientID(Integer.valueOf(selection));
 //
             int ID=0;
-//            if(edit_check==true){
-//                p.setPatientID(Integer.valueOf(patientID.getText()));
-//                db.updatePatient(p);
-//                edit_check=false;
-//            }
-//            else
-            ID=db.insertMedicalHistory(g);
+            if(edit_check==true){
+                g.setPatientID(Integer.valueOf(patientID.getText()));
+                db.updateGeneralHistory(g);
+                db.updatePatient(p);//for marital status
+                edit_check=false;
+            }
+            else{
+                ID=db.insertMedicalHistory(g);
+                db.updatePatient(p);//marital status
+            }
+            
 //
-            //find a row to show the result
-            GeneralMedicalHistory t= db.findGeneralMediclaHistory (Integer.toString(ID));
-
-            patientID.setText(Integer.toString(t.getPatientID()));
-            typeT.setText(t.getTobacco());
-            quantityT.setText(t.getTobaccoQuantity());
-            durationT.setText(t.getTobaccoDuration());
-            typeA.setText(t.getAlcohol());
-            quantityA.setText(t.getAlcoholQuantity());
-            durationA.setText(t.getAlcoholDuration());
-            drug.setText(t.getDrug());
-            typeD.setText(t.getDrug());
-            durationD.setText(t.getDrugDuration());
-            bloodType.setText(t.getBloodType());
-            rh.setText(t.getRh());
-            
-            
+          
             //turn to gray background and lock
             patientID.setEnabled(false);
+            tobacco.setEnabled(false);
             typeT.setEnabled(false);
             quantityT.setEnabled(false);
             durationT.setEnabled(false);
+            alcohol.setEnabled(false);
             typeA.setEnabled(false);
             quantityA.setEnabled(false);
             durationA.setEnabled(false);
@@ -595,6 +589,7 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
             durationD.setEnabled(false);
             bloodType.setEnabled(false);
             rh.setEnabled(false);
+            maritalStatus.setEnabled(false);
 
         }
     }//GEN-LAST:event_SaveActionPerformed
@@ -609,59 +604,34 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
 
     private void NewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewActionPerformed
         if(evt.getSource()==New){
-//            patientID.setText("autogenerated");
-//            lastname.setText("");
-//            p_lastname.setText("");
-//            firstname.setText("");
-//            home_address1.setText("");
-//            home_address2.setText("");
-//            home_city.setText("");
-//            state.setText("");
-//            home_zip.setText("");
-//            country.setText("");
-//            citizenship.setText("");
-//            home_phone.setText("");
-//            emergency_phone.setText("");
-//            email.setText("");
-//            ssn.setText("");
-//            dob.setText("");
-//            gender.setText("");
-//            ethnic_association.setText("");
-//            martial_status.setText("");
-//            current_primary_hcpid.setText("");
-//            active.setText("");
-//            comments.setText("");
-//            subscriber_realtionship.setText("");
-//            nok.setText("");
-//            middle_initial.setText("");
-//            nok_realtionship_to_patient.setText("");
-//
-//            //patientID.setEnabled(true);
-//            lastname.setEnabled(true);
-//            p_lastname.setEnabled(true);
-//            firstname.setEnabled(true);
-//            home_address1.setEnabled(true);
-//            home_address2.setEnabled(true);
-//            home_city.setEnabled(true);
-//            state.setEnabled(true);
-//            home_zip.setEnabled(true);
-//            country.setEnabled(true);
-//            citizenship.setEnabled(true);
-//            home_phone.setEnabled(true);
-//            emergency_phone.setEnabled(true);
-//            email.setEnabled(true);
-//            ssn.setEnabled(true);
-//            dob.setEnabled(true);
-//            gender.setEnabled(true);
-//            ethnic_association.setEnabled(true);
-//            martial_status.setEnabled(true);
-//            current_primary_hcpid.setEnabled(true);
-//            active.setEnabled(true);
-//            comments.setEnabled(true);
-//            subscriber_realtionship.setEnabled(true);
-//            nok.setEnabled(true);
-//            middle_initial.setEnabled(true);
-//            nok_realtionship_to_patient.setEnabled(true);
+            
+            typeT.setText("");
+            quantityT.setText("");
+            durationT.setText("");
+            typeA.setText("");
+            quantityA.setText("");
+            durationA.setText("");
+            drug.setText("");
+            typeD.setText("");
+            durationD.setText("");
+            bloodType.setText("");
+            rh.setText("");
+
+            //patientID.setEnabled(true);
+            tobacco.setEnabled(true);
+            typeT.setEnabled(true);
+            quantityT.setEnabled(true);
+            durationT.setEnabled(true);
+            alcohol.setEnabled(true);
+            typeA.setEnabled(true);
+            quantityA.setEnabled(true);
+            durationA.setEnabled(true);
+            drug.setEnabled(true);
+            typeD.setEnabled(true);
+            durationD.setEnabled(true);
+            bloodType.setEnabled(true);
+            rh.setEnabled(true);
+            maritalStatus.setEnabled(true);
         }
     }//GEN-LAST:event_NewActionPerformed
 
@@ -697,33 +667,22 @@ public class GeneralMedicalPage extends javax.swing.JFrame {
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         if(evt.getSource()==edit){
-//            edit_check=true;
-//            //patientID.setEnabled(true);
-//            lastname.setEnabled(true);
-//            p_lastname.setEnabled(true);
-//            firstname.setEnabled(true);
-//            home_address1.setEnabled(true);
-//            home_address2.setEnabled(true);
-//            home_city.setEnabled(true);
-//            state.setEnabled(true);
-//            home_zip.setEnabled(true);
-//            country.setEnabled(true);
-//            citizenship.setEnabled(true);
-//            home_phone.setEnabled(true);
-//            emergency_phone.setEnabled(true);
-//            email.setEnabled(true);
-//            ssn.setEnabled(true);
-//            dob.setEnabled(true);
-//            gender.setEnabled(true);
-//            ethnic_association.setEnabled(true);
-//            martial_status.setEnabled(true);
-//            current_primary_hcpid.setEnabled(true);
-//            active.setEnabled(true);
-//            comments.setEnabled(true);
-//            subscriber_realtionship.setEnabled(true);
-//            nok.setEnabled(true);
-//            middle_initial.setEnabled(true);
-//            nok_realtionship_to_patient.setEnabled(true);
+            edit_check=true;
+            //patientID.setEnabled(true);
+            tobacco.setEnabled(true);
+            typeT.setEnabled(true);
+            quantityT.setEnabled(true);
+            durationT.setEnabled(true);
+            alcohol.setEnabled(true);
+            typeA.setEnabled(true);
+            quantityA.setEnabled(true);
+            durationA.setEnabled(true);
+            drug.setEnabled(true);
+            typeD.setEnabled(true);
+            durationD.setEnabled(true);
+            bloodType.setEnabled(true);
+            rh.setEnabled(true);
+            maritalStatus.setEnabled(true);
         }
     }//GEN-LAST:event_editActionPerformed
 

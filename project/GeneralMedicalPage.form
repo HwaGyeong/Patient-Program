@@ -59,24 +59,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel11" min="-2" pref="46" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="rh" min="-2" pref="68" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jLabel9" min="-2" pref="40" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="maritalStatus" min="-2" pref="68" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jLabel10" min="-2" pref="46" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="rh" min="-2" pref="68" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" pref="40" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="maritalStatus" min="-2" pref="68" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" min="-2" pref="46" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel11" alignment="1" min="-2" pref="46" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <EmptySpace min="18" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="durationA" min="-2" pref="68" max="-2" attributes="0"/>
                                   <Component id="typeA" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
@@ -412,17 +407,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="bloodType">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bloodTypeActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="rh">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rhActionPerformed"/>
       </Events>
@@ -433,9 +422,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="maritalStatus">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -453,14 +439,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="typeA">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="durationA">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
@@ -483,39 +463,18 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tobacco">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="typeT">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="quantityT">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="durationT">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="drug">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="typeD">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="durationD">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
@@ -533,9 +492,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="quantityA">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
       <Properties>
@@ -543,9 +499,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="alcohol">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alcoholActionPerformed"/>
       </Events>

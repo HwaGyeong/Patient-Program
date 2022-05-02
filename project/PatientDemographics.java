@@ -118,7 +118,6 @@ public class PatientDemographics extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Patient Program");
-        setPreferredSize(new java.awt.Dimension(602, 489));
         setSize(new java.awt.Dimension(602, 489));
 
         dob.setEnabled(false);
@@ -434,7 +433,7 @@ public class PatientDemographics extends javax.swing.JFrame {
             }
         });
 
-        interview.setText("interview");
+        interview.setText("General Medical History");
         interview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 interviewActionPerformed(evt);
@@ -447,20 +446,6 @@ public class PatientDemographics extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)
-                        .addComponent(interview))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(patientIDL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(home_address1L)
-                        .addGap(62, 62, 62)
-                        .addComponent(home_address1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(lastnameL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,17 +564,30 @@ public class PatientDemographics extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(192, 192, 192)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(interview))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(patientIDL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(47, 47, 47)
+                            .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(53, 53, 53)
+                            .addComponent(home_address1L)
+                            .addGap(62, 62, 62)
+                            .addComponent(home_address1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
                     .addComponent(interview))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,36 +786,6 @@ public class PatientDemographics extends javax.swing.JFrame {
             else
                 ID=db.insertPatient(p);
             
-            //find a row to show the result 
-            Patient t= db.findPatient(Integer.toString(ID));
-            
-            patientID.setText(Integer.toString(t.getPatientID()));
-            lastname.setText(t.getLastName());
-            p_lastname.setText(t.getPrevLastname());
-            firstname.setText(p.getFirstName());
-            home_address1.setText(p.getHomeAddress1());
-            home_address2.setText(p.getHomeAddress2());
-            home_city.setText(p.getHomeCity());
-            state.setText(p.getHomeState());
-            home_zip.setText(p.getHomeZip());
-            country.setText(p.getCountry());
-            citizenship.setText(p.getCityzenship());
-            home_phone.setText(p.getHomePhone());
-            emergency_phone.setText(p.getEmergencyPhone());
-            email.setText(p.getEmail());
-            ssn.setText(p.getPtss());
-            dob.setText(p.getDob());
-            gender.setText(p.getGender());
-            ethnic_association.setText(p.getEthnicAssociation());
-            martial_status.setText(p.getMartialStatus());
-            current_primary_hcpid.setText(p.getCurrentPrimaryHCPId());
-            active.setText(Integer.toString(p.getActive()));
-            comments.setText(p.getComments());
-            subscriber_realtionship.setText(p.getSubscriberRelationship());
-            nok.setText(p.getNextOfKin());
-            middle_initial.setText(p.getMiddleInitial());
-            nok_realtionship_to_patient.setText(p.getNextOfKinRelationshipToPatient());
-
             //turn to gray background and lock
             lastname.setEnabled(false);
             p_lastname.setEnabled(false);
